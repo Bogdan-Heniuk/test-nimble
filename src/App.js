@@ -18,6 +18,7 @@ function App() {
             },
             isActive : true
         }))
+        input.clear()
     }
     return (
       <div className='container'>
@@ -26,7 +27,7 @@ function App() {
               <a onClick={add} className="waves-effect waves-light btn">+</a>
           </div>
 
-          {trackers.map(tracker => <Tracker key = {tracker.id} props = {tracker}/>)}
+          {trackers.map(tracker => <Tracker key = {tracker.id} tracker = {tracker}/>)}
 
       </div>
   );
