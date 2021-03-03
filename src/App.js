@@ -1,24 +1,34 @@
-import logo from './logo.svg';
 import './App.css';
-
+import Tracker from "./components/tracker";
+import {useDispatch, useSelector} from "react-redux";
+import {addTracker} from "./redux/actions";
+import useInputValue from "./hooks/use-input-value";
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    const trackers = useSelector(state => state.tracker)
+    const dispatch = useDispatch()
+    const input = useInputValue('')
+    const add = () => {
+        dispatch(addTracker({
+            id : Math.random(),
+            name : input.value(),
+            time : {
+                H : 0,
+                M : 0,
+                S : 0
+            },
+            isActive : true
+        }))
+    }
+    return (
+      <div className='container'>
+          <div style={{display: "flex", alignItems: "center"}}>
+              <input type="text" {...input.bind}/>
+              <a onClick={add} className="waves-effect waves-light btn">+</a>
+          </div>
+
+          {trackers.map(tracker => <Tracker key = {tracker.id} props = {tracker}/>)}
+
+      </div>
   );
 }
 
