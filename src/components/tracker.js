@@ -5,10 +5,11 @@ import {faTrash} from "@fortawesome/free-solid-svg-icons";
 import {faPause} from "@fortawesome/free-solid-svg-icons";
 import '../App.css'
 import {useDispatch} from "react-redux";
-import {deleteTracker, pauseTracker, resumeTracker, updateTracker} from "../redux/actions";
+import {deleteTracker, pauseTracker, resumeTracker} from "../redux/actions";
 
 export default function Tracker({tracker}) {
-const dispatch = useDispatch()
+    const dispatch = useDispatch()
+
     function pause(tracker){
         dispatch(pauseTracker(tracker))
     }
@@ -24,13 +25,13 @@ const dispatch = useDispatch()
     function formatter(time){
         return time < 10 ? "0" + time : time
     }
-    const {name, time, isActive} = tracker
+    const {title, time, isActive} = tracker
 
     return (
         <>
             <div className="collection">
                 <div className={isActive ? 'collection-item is-active' : 'collection-item'}>
-                    <span className="name">{name}</span>
+                    <span className="name">{title}</span>
                     <span className="time">{formatter(time.H)}:{formatter(time.M)}:{formatter(time.S)}
                         <span className="icons">
                             {isActive

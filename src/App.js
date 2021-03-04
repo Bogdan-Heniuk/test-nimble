@@ -12,45 +12,17 @@ function App() {
 
     useEffect(() => {
         const interval = setInterval(() => {
-            run()
+            dispatch(updateTracker());
         }, 1000);
         return () => clearInterval(interval);
-    }, [trackers]);
+    }, [dispatch]);
 
     function add() {
-        dispatch(addTracker({
-            id: Math.random(),
-            name: input.value() || new Date().toLocaleDateString(),
-            time: {
-                H: 0,
-                M: 0,
-                S: 0
-            },
-            isActive: true
-        }))
+        dispatch(addTracker(input.value()))
         input.clear()
     }
 
-    function run() {
-        if(!trackers.length) return
-        trackers.forEach(tracker => {
-            if (tracker.isActive) {
-                tracker.time.S++
-                if (tracker.time.S === 60) {
-                    tracker.time.M++
-                    tracker.time.S = 0
-                }
-                if (tracker.time.M === 60) {
-                    tracker.time.H++
-                    tracker.time.M = 0
-                }
-            }
-            dispatch(updateTracker(trackers));
-        })
-
-    }
-
-    function displayTrackers(){
+    function displayTrackers() {
         return trackers.map(tracker => <Tracker key={tracker.id} tracker={tracker}/>)
     }
 

@@ -7,15 +7,11 @@ export const trackersReducer = (state = initialState, action) => {
         case "UPDATE_TRACKER" :
             return [...action.payload]
         case "DELETE_TRACKER" :
-            return state.filter(element => element.id !== action.payload.id)
+            return [...state]
         case "PAUSE" :
-            const index = state.findIndex(element => element.id === action.payload.id)
-            state[index].isActive = false
-            return state
+            return [...state]
         case "RESUME" :
-            const indx = state.findIndex(element => element.id === action.payload.id)
-            state[indx].isActive = true
-            return state
+            return [...state]
         default :
             return state
     }
