@@ -33,10 +33,11 @@ export const updateTracker = () => (dispatch, getState) => {
 export const deleteTracker = (tracker) => (dispatch, getState) => {
     const {trackers} = getState()
     const payload = trackers.filter(element => element.id !== tracker.id)
-    return {
+    // debugger
+    dispatch ({
         type: "DELETE_TRACKER",
         payload
-    }
+    })
 }
 
 export const pauseTracker = (tracker) => (dispatch) => {
@@ -54,5 +55,20 @@ export const resumeTracker = (tracker) => (dispatch) => {
     dispatch({
         type: "RESUME",
         payload: tracker
+    })
+}
+
+export const rehydrateTrackers = () => (dispatch, getState) => {
+    const {trackers} = getState()
+    trackers.forEach(tracker => {
+        if(tracker.isActive){
+            const timeDiff = moment().diff(moment(tracker.lastTick))
+            tracker.duration = tracker.duration + moment.duration(timeDiff).asSeconds()
+            tracker.lastTick = moment().valueOf()
+        }
+    })
+    dispatch ({
+        type: "UPDATE_TRACKER",
+        payload: trackers
     })
 }

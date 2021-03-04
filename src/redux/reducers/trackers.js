@@ -7,7 +7,7 @@ export const trackersReducer = (state = initialState, action) => {
         case "UPDATE_TRACKER" :
             return [...action.payload]
         case "DELETE_TRACKER" :
-            return [...state]
+            return [...action.payload]
         case "PAUSE" :
             return [...state]
         case "RESUME" :
