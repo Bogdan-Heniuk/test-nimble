@@ -1,4 +1,5 @@
 import moment from 'moment'
+import {actionTypes} from "./types";
 
 export const addTracker = (title) => (dispatch) => {
     const payload = {
@@ -10,7 +11,7 @@ export const addTracker = (title) => (dispatch) => {
     }
 
     dispatch({
-        type: "ADD_TRACKER",
+        type: actionTypes.ADD_TRACKER,
         payload
     })
 }
@@ -25,7 +26,7 @@ export const updateTracker = () => (dispatch, getState) => {
     })
 
     dispatch({
-        type: "UPDATE_TRACKER",
+        type: actionTypes.UPDATE_TRACKER,
         payload: trackers
     })
 }
@@ -33,9 +34,8 @@ export const updateTracker = () => (dispatch, getState) => {
 export const deleteTracker = (tracker) => (dispatch, getState) => {
     const {trackers} = getState()
     const payload = trackers.filter(element => element.id !== tracker.id)
-    // debugger
     dispatch ({
-        type: "DELETE_TRACKER",
+        type: actionTypes.DELETE_TRACKER,
         payload
     })
 }
@@ -44,7 +44,7 @@ export const pauseTracker = (tracker) => (dispatch) => {
     tracker.isActive = false
 
     dispatch({
-        type: "PAUSE",
+        type: actionTypes.PAUSE,
         payload: tracker
     })
 }
@@ -53,7 +53,7 @@ export const resumeTracker = (tracker) => (dispatch) => {
     tracker.isActive = true
 
     dispatch({
-        type: "RESUME",
+        type: actionTypes.RESUME,
         payload: tracker
     })
 }
@@ -68,7 +68,7 @@ export const rehydrateTrackers = () => (dispatch, getState) => {
         }
     })
     dispatch ({
-        type: "UPDATE_TRACKER",
+        type: actionTypes.UPDATE_TRACKER,
         payload: trackers
     })
 }
