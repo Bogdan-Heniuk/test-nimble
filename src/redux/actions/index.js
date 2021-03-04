@@ -1,15 +1,12 @@
-import {findTrackerIndex} from "../../utils";
+import moment from 'moment'
 
 export const addTracker = (title) => (dispatch) => {
     const payload = {
         id: Math.random(),
         title: title || new Date().toLocaleDateString(),
-        time: {
-            H: 0,
-            M: 0,
-            S: 0
-        },
-        isActive: true
+        isActive: true,
+        duration: 0,
+        lastTick: moment().valueOf()
     }
 
     dispatch({
@@ -20,18 +17,10 @@ export const addTracker = (title) => (dispatch) => {
 
 export const updateTracker = () => (dispatch, getState) => {
     const {trackers} = getState()
-    if (!trackers.length) return
     trackers.forEach(tracker => {
         if (tracker.isActive) {
-            tracker.time.S++
-            if (tracker.time.S === 60) {
-                tracker.time.M++
-                tracker.time.S = 0
-            }
-            if (tracker.time.M === 60) {
-                tracker.time.H++
-                tracker.time.M = 0
-            }
+            tracker.duration++
+            tracker.lastTick = moment().valueOf()
         }
     })
 

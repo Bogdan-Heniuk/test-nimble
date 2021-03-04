@@ -22,17 +22,19 @@ export default function Tracker({tracker}) {
         dispatch(deleteTracker(tracker))
     }
 
-    function formatter(time){
-        return time < 10 ? "0" + time : time
+    function formatter(duration){
+        const date = new Date(0)
+        date.setSeconds(duration)
+        return date.toISOString().substr(11, 8)
     }
-    const {title, time, isActive} = tracker
+    const {title, duration, isActive} = tracker
 
     return (
         <>
             <div className="collection">
                 <div className={isActive ? 'collection-item is-active' : 'collection-item'}>
                     <span className="name">{title}</span>
-                    <span className="time">{formatter(time.H)}:{formatter(time.M)}:{formatter(time.S)}
+                    <span className="time">{formatter(duration)}
                         <span className="icons">
                             {isActive
                                 ? <FontAwesomeIcon className='icon pause' icon={faPause} onClick={() => pause(tracker)}/>
