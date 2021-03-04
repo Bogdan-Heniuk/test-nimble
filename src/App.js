@@ -3,7 +3,9 @@ import Tracker from "./components/tracker";
 import {useDispatch, useSelector} from "react-redux";
 import {addTracker, updateTracker} from "./redux/actions";
 import useInputValue from "./hooks/use-input-value";
-import {useEffect} from 'react'
+import React, {useEffect} from 'react'
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faPlay} from "@fortawesome/free-solid-svg-icons";
 
 function App() {
     const trackers = useSelector(state => state.trackers)
@@ -30,7 +32,10 @@ function App() {
         <div className='container'>
             <div style={{display: "flex", alignItems: "center"}}>
                 <input type="text" {...input.bind}/>
-                <a onClick={add} className="waves-effect waves-light btn">+</a>
+                {/*<a onClick={add} className="waves-effect waves-light btn">*/}
+                    <FontAwesomeIcon className='icon add' icon={faPlay} onClick={add}/>
+                {/*</a>*/}
+
             </div>
             {displayTrackers()}
         </div>

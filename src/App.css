@@ -5,12 +5,12 @@ body{
 .is-active{
     color: #83ba28;
     opacity: 1 !important;
+    background-color: rgba(242, 246, 117, 0.1) !important;
 }
 
 .collection-item{
     display: flex;
     justify-content: space-between;
-    opacity: 0.2;
 }
 
 .delete{
@@ -20,5 +20,8 @@ body{
 .icon{
     margin-left: 10px;
     cursor: pointer;
-    color : black
+    color : black;
 }
+
+
+
