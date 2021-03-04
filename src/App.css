@@ -2,6 +2,10 @@ body{
     font-weight: 700;
 }
 
+.container {
+    max-width: 560px;
+}
+
 .is-active{
     color: #83ba28;
     opacity: 1 !important;

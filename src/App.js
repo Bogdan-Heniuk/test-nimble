@@ -32,10 +32,7 @@ function App() {
         <div className='container'>
             <div style={{display: "flex", alignItems: "center"}}>
                 <input type="text" {...input.bind}/>
-                {/*<a onClick={add} className="waves-effect waves-light btn">*/}
                     <FontAwesomeIcon className='icon add' icon={faPlay} onClick={add}/>
-                {/*</a>*/}
-
             </div>
             {displayTrackers()}
         </div>
